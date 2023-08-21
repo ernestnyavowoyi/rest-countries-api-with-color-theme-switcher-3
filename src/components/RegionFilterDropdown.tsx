@@ -1,15 +1,16 @@
 import React from 'react'
 import { setSelectedRegion, clearSelectedRegion } from '../features/regionFilter/regionFilterSlice';
 import { clearSearchTerm } from '../features/nameSearch/nameSearchSlice';
-import { useSelector, useDispatch } from 'react-redux';
-// import { filterCountriesByRegion as filter } from '../features/regionFilter/regionFilterSlice';
+// import { useSelector, useDispatch } from 'react-redux';
+import { useAppDispatch, useAppSelector } from '../app/hooks';
 
+// import { filterCountriesByRegion as filter } from '../features/regionFilter/regionFilterSlice';
 
 const RegionFilterDropdown = React.memo(() => {
 
-    const regionFilter = useSelector((state) => state.regionFilter);
+    const regionFilter = useAppSelector((state) => state.regionFilter);
     
-    const dispatch = useDispatch();
+    const dispatch = useAppDispatch();
     const options = [
         { value: "", label: "All"},
         { value: "africa", label: "Africa"},

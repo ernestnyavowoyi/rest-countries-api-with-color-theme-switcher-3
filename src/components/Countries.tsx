@@ -1,16 +1,16 @@
 import React, { useEffect } from 'react'
 import { CountryType, fetchAllCountries } from '../features/country/countrySlice';
-import { useDispatch, useSelector } from 'react-redux';
+// import { useDispatch, useSelector } from 'react-redux';
+import { useAppDispatch, useAppSelector } from '../app/hooks';
 import { CountryCard } from './CountryCard';
 import { CountryNameSearchInput } from './CountryNameSearchInput';
 import RegionFilterDropdown from './RegionFilterDropdown';
 
-
 const Countries = React.memo(() => {
 
-    const countriesState = useSelector((state) => state.allCountries);
-    const nameSearchState = useSelector((state) => state.nameSearch);
-    const dispatch = useDispatch();
+    const countriesState = useAppSelector((state) => state.allCountries);
+    const nameSearchState = useAppSelector((state) => state.nameSearch);
+    const dispatch = useAppDispatch();
 
     useEffect(() => {
         console.log('This is a nice must-have feature!');

@@ -1,53 +1,55 @@
-import React, { useEffect } from 'react'
+import { useEffect } from 'react'
 import { useParams, useNavigate, useLocation } from 'react-router-dom'
-import { useSelector, useDispatch } from 'react-redux';
+// import { useSelector, useDispatch } from 'react-redux';
+import { useAppDispatch, useAppSelector } from '../app/hooks';
+
 import { CountryType, fetchCountryByAlphaCode, setSelectedDisplayCountry } from '../features/country/countrySlice';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowLeftLong } from '@fortawesome/free-solid-svg-icons';
 import { fetchAllCountries } from '../features/country/countrySlice';
-
-
+import { Params } from 'react-router-dom';
 
 const CountryDetailsCard = () => {
 
-    const { cca3 } = useParams();
+    const { cca3 } : Readonly<Params<string>> = useParams() ?? '';
     const location = useLocation();
 
     const navigate = useNavigate();
 
-    const countriesState = useSelector((state) => state.allCountries);
+    const countriesState = useAppSelector((state) => state.allCountries);
 
     const allCountries = countriesState.allCountries;
-    const selectedDisplayCountry = countriesState.selectedDisplayCountry;
+    const selectedDisplayCountry : CountryType = countriesState.selectedDisplayCountry;
 
-    const dispatch = useDispatch();
+    const dispatch = useAppDispatch();
 
-    const getNativeName = (obj) => {
+
+    const getNativeName = (obj: {[key: string]: {common: string}}) => {
         if (!obj) {
             return "";
-        };
+        }
         const keys = Object.keys(obj);
         const lastKey = keys[keys.length - 1];
         return obj[lastKey].common;
     }
 
-    const getTopLevelDomains = (arr) => {
+    const getTopLevelDomains = (arr: Array<string>) => {
         if (!arr || !arr.length) {
             return "";
-        };
+        }
         return arr.join(", ");
     }
 
-    const getCurrencies = (obj) => {
+    const getCurrencies = (obj: { [key: string]: { [key: string]: string} } ) => {
         if (!obj) {
             return "";
         }
         const keys = Object.keys(obj);
-        const result = keys.map((curr) => obj[curr].name);
+        const result:Array<string> = keys.map(curr => obj[curr].name);
         return result.join(", ");
     }
 
-    const getLanguages = (obj) => {
+    const getLanguages = (obj: {[key: string] : string}) => {
         if (!obj) {
             return "";
         }
@@ -56,7 +58,7 @@ const CountryDetailsCard = () => {
         return result.join(", ");
     }
 
-    const handleBorderCountryClick = (e) => {
+    const handleBorderCountryClick = ( e ) => {
         e.preventDefault();
         const navLink = e.target.attributes['data-country-code'].value;
         // console.log(navLink);
@@ -136,7 +138,7 @@ const CountryDetailsCard = () => {
                                                         <ul className='border_countries'>
                                                             {
                                                                 (selectedDisplayCountry.borders && selectedDisplayCountry.borders.length) ? selectedDisplayCountry.borders.map((border) => {
-                                                                    const country_info = allCountries.filter((country:CountryType) => country.cca3 === border)[0];
+                                                                    const country_info = allCountries.filter((country: CountryType) => country.cca3 === border)[0];
                                                                     return (
                                                                         <li data-country-code={country_info.cca3} className='button' onClick={handleBorderCountryClick} key={border}>{country_info.name.common}</li>
                                                                     );
@@ -146,7 +148,7 @@ const CountryDetailsCard = () => {
                                                         </ul>
                                                     ) :
                                                         (
-                                                            <ul className='border_countries'>{selectedDisplayCountry.borders && selectedDisplayCountry.border.length ? selectedDisplayCountry.borders.map((border:Array<string>) => (<li className='button' onClick={handleBorderCountryClick} key={border}>{border}</li>)) : (<span>No border countries.</span>)}</ul>
+                                                            <ul className='border_countries'>{selectedDisplayCountry.borders && selectedDisplayCountry.borders.length ? selectedDisplayCountry.borders.map(border => (<li className='button' onClick={handleBorderCountryClick} key={border}>{border}</li>)) : (<span>No border countries.</span>)}</ul>
                                                         )
                                                 }
 

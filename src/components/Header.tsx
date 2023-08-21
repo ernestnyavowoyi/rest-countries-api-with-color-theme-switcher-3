@@ -1,10 +1,11 @@
-import React from 'react'
 import DarkModeToggler from './DarkModeToggler';
-import { useSelector } from 'react-redux';
+// import { useSelector } from 'react-redux';
+import { useAppSelector } from '../app/hooks';
+
 
 const Header = () => {
 
-  const darkModeState = useSelector((state) => state.darkMode);
+  const darkModeState = useAppSelector((state) => state.darkMode);
 
   return (
     <div className={`header_container${darkModeState.modeName === "dark" ? "_darkMode" : ""}`}>

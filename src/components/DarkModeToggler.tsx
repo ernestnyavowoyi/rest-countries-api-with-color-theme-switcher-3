@@ -1,4 +1,3 @@
-import React from 'react'
 import { useDispatch } from 'react-redux';
 import { toggleDarkMode } from '../features/darkMode/darkModeSlice';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';

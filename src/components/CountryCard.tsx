@@ -1,7 +1,13 @@
 import React from 'react'
 import { useNavigate } from 'react-router-dom'
+import { CountryType } from '../features/country/countrySlice';
 
-export const CountryCard = React.memo(({ info }) => {
+// Define the props interface
+interface ComponentProps {
+  info: CountryType
+}
+
+export const CountryCard: React.FC<ComponentProps> = React.memo(({ info }) => {
 
   const navigate = useNavigate();  
 

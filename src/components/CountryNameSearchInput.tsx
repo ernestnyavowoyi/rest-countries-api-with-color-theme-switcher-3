@@ -1,18 +1,20 @@
-import React from 'react'
-import { useDispatch, useSelector } from 'react-redux';
-import { searchCountriesByName, updateSearchTerm } from '../features/nameSearch/nameSearchSlice';
-import { setCountries, clearNameFilter, filterCountriesByName } from '../features/country/countrySlice';
+import React /*{FormEvent, KeyboardEvent}*/ from 'react'
+// import { useDispatch, useSelector } from 'react-redux';
+import { useAppDispatch, useAppSelector } from '../app/hooks';
+
+import { updateSearchTerm } from '../features/nameSearch/nameSearchSlice';
+import { filterCountriesByName } from '../features/country/countrySlice';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSearch } from '@fortawesome/free-solid-svg-icons';
-import { setSelectedRegion, clearSelectedRegion, getSelectedRegion } from '../features/regionFilter/regionFilterSlice';
+import { setSelectedRegion } from '../features/regionFilter/regionFilterSlice';
 
 export const CountryNameSearchInput = React.memo(() => {
-    const countryNameSearchState = useSelector((state) => state.nameSearch);
-    const allCountries = useSelector((state) => state.allCountries);
-    const regionState = useSelector((state) => state.regionFilter);
-    const dispatch = useDispatch();
+    const countryNameSearchState = useAppSelector((state) => state.nameSearch);
+    // const allCountries = useAppSelector((state) => state.allCountries);
+    const regionState = useAppSelector((state) => state.regionFilter);
+    const dispatch = useAppDispatch();
 
-    const handleSearch = (event) => {
+    const handleSearch = (event: any) => {
         event.preventDefault();
         if(event.key === "Enter") {
             if (countryNameSearchState.searchTerm.trimStart() === '') {

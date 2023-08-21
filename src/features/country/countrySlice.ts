@@ -1,18 +1,17 @@
-import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
+import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { API } from "../../utils/api";
 import axios from 'axios';
 
 import { setSelectedRegion, clearSelectedRegion } from '../regionFilter/regionFilterSlice';
 
+
 export interface CountryType {
     name: {
         common: string,
         official: string,
-        nativeName: {
-            [key: string]: string
-        }
+        nativeName: {[key: string]: string}
     },
-    popultion: number,
+    population: number,
     region: string,
     borders: Array<string>,
     capital: Array<string>,
@@ -26,15 +25,39 @@ export interface CountryType {
     languages: {
         [key: string]: string
     },
-    cca3: string
+    cca3: string,
+    currencies: {
+        [key:string]: string
+    }
+}
 
+const emptyCountryType: CountryType = {
+    name: {
+        common: "",
+        official: "",
+        nativeName: {}
+    },
+    population: 0,
+    region: "",
+    borders: [],
+    capital: [],
+    flags: {
+        alt: "",
+        png: "",
+        svg: ""
+    },
+    subregion: "",
+    tld: [],
+    languages: {},
+    cca3: "",
+    currencies: {},
 }
 
 interface InitialState {
     allCountries: Array<CountryType>,
     loading: boolean,
     errorMsg: string,
-    selectedDisplayCountry: object,
+    selectedDisplayCountry: CountryType,
     displayedCountries: Array<CountryType>
 }
 
@@ -43,7 +66,7 @@ const initialState : InitialState = {
     allCountries: [],
     loading: false,
     errorMsg: "",
-    selectedDisplayCountry: {},
+    selectedDisplayCountry: emptyCountryType,
     displayedCountries: [],
 };
 
@@ -79,20 +102,20 @@ const countrySlice = createSlice({
 
         clearSelectedDisplayCountry: (state) => {
             state.loading = false;
-            state.selectedDisplayCountry = {};
+            state.selectedDisplayCountry = emptyCountryType;
             state.errorMsg = "";
         },
 
         clearNameFilter: (state) => {
             state.loading = false;
-            state.selectedDisplayCountry = {};
+            state.selectedDisplayCountry = emptyCountryType;
             state.errorMsg = '';
             state.displayedCountries = state.allCountries;
         },
 
         filterCountriesByName: (state, action) => {
             state.loading = false;
-            state.selectedDisplayCountry = {};
+            state.selectedDisplayCountry = emptyCountryType;
             state.errorMsg = '';
             const q = action.payload.toLowerCase().trimStart();
             // if there is no search term, we simply dispatch the clear name filter
@@ -152,7 +175,7 @@ const countrySlice = createSlice({
         builder.addCase(clearSelectedRegion, (state) => {
             state.loading = false;
             state.displayedCountries = state.allCountries;
-            state.selectedDisplayCountry = {};
+            state.selectedDisplayCountry = emptyCountryType;
             state.errorMsg = "";
             console.log(`Filter on countries cleared.`);
         })

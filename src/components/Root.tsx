@@ -1,10 +1,12 @@
-import React from 'react'
 import Header from './Header';
 import { Outlet } from 'react-router-dom';
-import { useSelector } from 'react-redux';
+// import { useSelector } from 'react-redux';
+import { useAppSelector } from '../app/hooks';
+
+
 const Root = () => {
 
-  const darkModeState = useSelector((state) => state.darkMode);
+  const darkModeState = useAppSelector((state) => state.darkMode);
   console.log(darkModeState);
 
 
