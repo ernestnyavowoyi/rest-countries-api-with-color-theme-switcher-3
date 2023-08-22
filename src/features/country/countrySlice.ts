@@ -4,12 +4,25 @@ import axios from 'axios';
 
 import { setSelectedRegion, clearSelectedRegion } from '../regionFilter/regionFilterSlice';
 
+export type NativeNameType = {
+    [languageCode: string]: {
+        official: string;
+        common: string;
+    };
+};
+
+export type CurrenciesType = {
+    [currencyCode: string]: {
+        name: string,
+        symbol: string
+    }
+}
 
 export interface CountryType {
     name: {
         common: string,
         official: string,
-        nativeName: {[key: string]: string}
+        nativeName: NativeNameType
     },
     population: number,
     region: string,
@@ -26,9 +39,7 @@ export interface CountryType {
         [key: string]: string
     },
     cca3: string,
-    currencies: {
-        [key:string]: string
-    }
+    currencies: CurrenciesType
 }
 
 const emptyCountryType: CountryType = {
@@ -62,7 +73,7 @@ interface InitialState {
 }
 
 // define the initial state (or skeleton) of this part of the application
-const initialState : InitialState = {
+const initialState: InitialState = {
     allCountries: [],
     loading: false,
     errorMsg: "",
@@ -119,9 +130,9 @@ const countrySlice = createSlice({
             state.errorMsg = '';
             const q = action.payload.toLowerCase().trimStart();
             // if there is no search term, we simply dispatch the clear name filter
-            if(!q) {
+            if (!q) {
                 state.displayedCountries = state.allCountries;
-                return;   
+                return;
             }
             // if(!state.displayedCountries) {
             //     console.log(state);
@@ -134,7 +145,7 @@ const countrySlice = createSlice({
                 return common_name.includes(q) || official_name.includes(q);
             })
 
-            state.displayedCountries = displayedCountries.length ? displayedCountries : []; 
+            state.displayedCountries = displayedCountries.length ? displayedCountries : [];
         }
     },
     extraReducers: (builder) => {
@@ -161,7 +172,7 @@ const countrySlice = createSlice({
         // Search for a list of countries belonging to the specified region
         builder.addCase(setSelectedRegion, (state, action) => {
             const region = action.payload.toLowerCase();
-            if(region) {
+            if (region) {
                 state.displayedCountries = state.allCountries.filter((country) => {
                     return country.region.toLowerCase() === region;
                 });

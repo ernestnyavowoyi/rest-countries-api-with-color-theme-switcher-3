@@ -3,13 +3,13 @@ import { useParams, useNavigate, useLocation } from 'react-router-dom'
 // import { useSelector, useDispatch } from 'react-redux';
 import { useAppDispatch, useAppSelector } from '../app/hooks';
 
-import { CountryType, fetchCountryByAlphaCode, setSelectedDisplayCountry } from '../features/country/countrySlice';
+import { CountryType, CurrenciesType, NativeNameType, setSelectedDisplayCountry } from '../features/country/countrySlice';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowLeftLong } from '@fortawesome/free-solid-svg-icons';
 import { fetchAllCountries } from '../features/country/countrySlice';
 import { Params } from 'react-router-dom';
 
-const CountryDetailsCard = () => {
+const CountryDetailsCard:  React.FC = () => {
 
     const { cca3 } : Readonly<Params<string>> = useParams() ?? '';
     const location = useLocation();
@@ -24,13 +24,13 @@ const CountryDetailsCard = () => {
     const dispatch = useAppDispatch();
 
 
-    const getNativeName = (obj: {[key: string]: {common: string}}) => {
+    const getNativeName = (obj: NativeNameType) => {
         if (!obj) {
             return "";
         }
         const keys = Object.keys(obj);
         const lastKey = keys[keys.length - 1];
-        return obj[lastKey].common;
+        return obj[lastKey]?.common;
     }
 
     const getTopLevelDomains = (arr: Array<string>) => {
@@ -40,7 +40,8 @@ const CountryDetailsCard = () => {
         return arr.join(", ");
     }
 
-    const getCurrencies = (obj: { [key: string]: { [key: string]: string} } ) => {
+
+    const getCurrencies = (obj: CurrenciesType ) => {
         if (!obj) {
             return "";
         }
@@ -58,14 +59,16 @@ const CountryDetailsCard = () => {
         return result.join(", ");
     }
 
-    const handleBorderCountryClick = ( e ) => {
+    const handleBorderCountryClick = ( e: React.MouseEvent<HTMLElement> ) => {
         e.preventDefault();
-        const navLink = e.target.attributes['data-country-code'].value;
+        const target = e.target as HTMLButtonElement;
+        const navLink = target.attributes.getNamedItem('data-country-code')?.value;
+        // const navLink = target.attributes['data-country-code'].value;
         // console.log(navLink);
         // return;
         // setCountryCode(e.target.innerText.trim());
         console.log('the thing is supposed to change');
-        navigate(`/${navLink || e.target.innerText}`);
+        navigate(`/${navLink || target.innerText}`);
     }
 
     useEffect(() => {
@@ -88,7 +91,17 @@ const CountryDetailsCard = () => {
             console.log(border_countries);
         } else {
             console.log(`WTF!.... we are crusing around by starting from this route!`);
-            dispatch(fetchCountryByAlphaCode(cca3));
+
+            // Fetch the country using the country's alpha code :)
+            const action = {
+                type: 'country/fetchCountryByAlphaCode',
+                payload: {
+                  code: cca3,
+                },
+              };
+              
+            dispatch(action);
+            // dispatch(fetchCountryByAlphaCode(cca3));
             dispatch(fetchAllCountries());
             // dispatch(setSelectedDisplayCountry(allCountries.filter((country) => country.cca3 === cca3)))
         }
