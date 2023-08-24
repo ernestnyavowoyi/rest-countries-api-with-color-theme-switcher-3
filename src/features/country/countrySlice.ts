@@ -179,16 +179,16 @@ const countrySlice = createSlice({
             } else {
                 state.displayedCountries = state.allCountries;
             }
-            console.log(`Filtering done for the selected region.`);
+            // console.log(`Filtering done for the selected region.`);
         })
 
-        // Changing the selected retion to re-display all the countries
+        // Changing the selected region to re-display all the countries
         builder.addCase(clearSelectedRegion, (state) => {
             state.loading = false;
             state.displayedCountries = state.allCountries;
             state.selectedDisplayCountry = emptyCountryType;
             state.errorMsg = "";
-            console.log(`Filter on countries cleared.`);
+            // console.log(`Filter on countries cleared.`);
         })
 
     }

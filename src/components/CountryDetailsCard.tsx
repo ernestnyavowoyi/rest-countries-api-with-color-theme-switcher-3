@@ -67,30 +67,30 @@ const CountryDetailsCard:  React.FC = () => {
         // console.log(navLink);
         // return;
         // setCountryCode(e.target.innerText.trim());
-        console.log('the thing is supposed to change');
+        // console.log('the thing is supposed to change');
         navigate(`/${navLink || target.innerText}`);
     }
 
     useEffect(() => {
         if (allCountries.length) {
-            console.log(`There were countries before oo`);
+            // console.log(`There were countries before oo`);
             const info = allCountries.filter((country) => country.cca3 === cca3);
             // console.log(info[0]);
             dispatch(setSelectedDisplayCountry(info[0]));
             const bordersCca3 = info[0].borders;
-            console.log(`the moment you find it!`);
-            console.log(bordersCca3);
-            console.log(`I hope you found it!`);
+            // console.log(`the moment you find it!`);
+            // console.log(bordersCca3);
+            // console.log(`I hope you found it!`);
             let border_countries = [];
             // console.log(bordersCca3);
             border_countries = bordersCca3 && bordersCca3.map((border) => {
-                console.log(`Getting name for ${border}`);
+                // console.log(`Getting name for ${border}`);
                 return allCountries.filter((country) => country.cca3 === border)[0].name.common;
             });
-            console.log(`So now we have the following as our border countries!`);
+            // console.log(`So now we have the following as our border countries!`);
             console.log(border_countries);
         } else {
-            console.log(`WTF!.... we are crusing around by starting from this route!`);
+            // console.log(`OMG!.... we are crusing around by starting from this route!`);
 
             // Fetch the country using the country's alpha code :)
             const action = {

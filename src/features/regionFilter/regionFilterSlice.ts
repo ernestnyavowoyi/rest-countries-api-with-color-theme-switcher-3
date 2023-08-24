@@ -1,20 +1,20 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
 import { API } from "../../utils/api";
-import { CountryType } from "../country/countrySlice";
+// import { CountryType } from "../country/countrySlice";
 
 interface InitialState {
     selectedRegion: string,
-    loading: boolean,
-    results: Array<CountryType>,
-    errorMsg: string
+    // loading: boolean,
+    // results: Array<CountryType>,
+    // errorMsg: string
 }
 
 const initialState : InitialState = {
     selectedRegion: "",
-    loading: false,
-    results: [],
-    errorMsg: ""
+    // loading: false,
+    // results: [],
+    // errorMsg: ""
 };
 
 export const filterCountriesByRegion = createAsyncThunk(
@@ -29,7 +29,7 @@ const regionFilterSlice = createSlice({
     initialState,
     reducers: {
         setSelectedRegion: (state, action) => {
-            console.log(action.payload);
+            // console.log(action.payload);
 
             const region = action.payload.trim();
             if(region) {

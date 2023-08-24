@@ -2,18 +2,18 @@ import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import { API } from "../../utils/api";
 import axios from "axios";
 import { setSelectedRegion, clearSelectedRegion } from '../regionFilter/regionFilterSlice';
-import { CountryType } from "../country/countrySlice";
+// import { CountryType } from "../country/countrySlice";
 
 type InitialState = {
     searchTerm: string,
-    searchResults: Array<CountryType>
+    // searchResults: Array<CountryType>
     loading: boolean,
     errorMsg: string,
 }
 
 const initialState : InitialState = {
     searchTerm: "",
-    searchResults: [],
+    // searchResults: [],
     loading: false,
     errorMsg: ""
 };
