@@ -1,4 +1,17 @@
-# React + TypeScript + Vite
+# Rest Countries API with Color Theme Switcher
+
+This project is available online [here on netlify](https://fastidious-conkies-1012e8.netlify.app/) and it is a project work I received worked during my studies.
+
+## Challenges and solution
+
+- Nested types with objects.
+I used [Google Bard](https://bard.google.com) as a resource to help me understand how to easily type this nested object.
+
+- CRA vs Vite.
+I found out that Vite was way faster to launch on my system compared to Create React App.
+I still use Create React App for my projects anyways, but I love Vite.
+
+Below is the default text you see in the README.md file for projects created with ReactJs.
 
 This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
 
