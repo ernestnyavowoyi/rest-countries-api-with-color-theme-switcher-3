@@ -1,6 +1,6 @@
 # Rest Countries API with Color Theme Switcher
 
-This project is available online [here on netlify](https://fastidious-conkies-1012e8.netlify.app/) and it is a project work I received worked during my studies.
+This project is available online [here on netlify](https://fastidious-conkies-1012e8.netlify.app/) and it is a project work I received worked during my studies at AmaliTech's Graduate Trainee Program.
 
 ## Challenges and solution
 
