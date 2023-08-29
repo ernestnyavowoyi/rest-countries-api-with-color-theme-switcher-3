@@ -1,6 +1,6 @@
-import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import axios from "axios";
-import { API } from "../../utils/api";
+import { createSlice } from "@reduxjs/toolkit";
+// import axios from "axios";
+// import { API } from "../../utils/api";
 // import { CountryType } from "../country/countrySlice";
 
 interface InitialState {
@@ -17,12 +17,13 @@ const initialState : InitialState = {
     // errorMsg: ""
 };
 
-export const filterCountriesByRegion = createAsyncThunk(
-    'filterCountriesByRegion',
-    async (region) => {
-        return axios.get(`${API.regionSearch}/${region}`).then((response) => response.data);
-    }
-)
+// Not used anymore. Since I am using filtering by javascript directly.
+// export const filterCountriesByRegion = createAsyncThunk(
+//     'filterCountriesByRegion',
+//     async (region) => {
+//         return axios.get(`${API.regionSearch}/${region}`).then((response) => response.data);
+//     }
+// )
 
 const regionFilterSlice = createSlice({
     name: 'regionFilter',

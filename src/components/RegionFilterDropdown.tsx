@@ -12,7 +12,7 @@ const RegionFilterDropdown = React.memo(() => {
     
     const dispatch = useAppDispatch();
     const options = [
-        { value: "", label: "All"},
+        { value: "", label: "Filter by Region"},
         { value: "africa", label: "Africa"},
         { value: "americas", label: "America"},
         { value: "asia", label: "Asia"},
