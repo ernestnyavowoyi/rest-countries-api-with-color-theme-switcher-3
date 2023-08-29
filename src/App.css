@@ -684,7 +684,7 @@ ul.border_countries>li:last-child {
 
 
 
-@media (min-width: 1024px) {
+@media (min-width: 1280px) {
 
   .countries_container {
     grid-template-columns: repeat(3, 1fr);
