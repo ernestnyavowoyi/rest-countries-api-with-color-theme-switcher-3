@@ -112,7 +112,7 @@ const CountryDetailsCard:  React.FC = () => {
 
             <div className='details_page'>
                 <div className="back_button_container">
-                    <button className='button' type="button" onClick={() => navigate('/')}><span><FontAwesomeIcon icon={faArrowLeftLong} /></span> <span>Back</span></button>
+                    <button className='' type="button" onClick={() => navigate('/')}><span><FontAwesomeIcon icon={faArrowLeftLong} /></span> <span>Back</span></button>
                 </div>
 
                 {countriesState.loading ? <p>Loading...</p> :
