@@ -14,7 +14,7 @@ export const CountryNameSearchInput = React.memo(() => {
     const regionState = useAppSelector((state) => state.regionFilter);
     const dispatch = useAppDispatch();
 
-    const handleSearch = (event) => {
+    const handleSearch = (event: any) => {
         event.preventDefault();
         if(event.key === "Enter") {
             if (countryNameSearchState.searchTerm.trimStart() === '') {
